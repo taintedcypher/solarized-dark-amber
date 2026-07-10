@@ -48,8 +48,6 @@ Application ports:
 
 Open [`index.html`](index.html) to view the full theme specimen. It is also ready to publish from the repository root with GitHub Pages.
 
-The [`palette-rebuild.html`](palette-rebuild.html) design record compares the previous palette with the adopted CIELAB-symmetric rebuild ([rendered comparison](assets/palette-rebuild.png)). Verify its measured constraints with `node scripts/verify-rebuild.mjs`.
-
 ## Credits
 
 Inspired by [Solarized](https://github.com/altercation/solarized), created by Ethan Schoonover. Solarized Dark Amber is an independent adaptation and is not affiliated with the original project.
