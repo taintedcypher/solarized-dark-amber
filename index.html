@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solarized Dark Amber</title>
+  <meta name="description" content="A warm, low-glare theme built on a Solarized-inspired CIELAB ramp.">
+  <link rel="stylesheet" href="palette.css">
+  <style>
+    :root {
+      --panel: rgba(59, 46, 28, 0.72);
+      --panel-soft: rgba(129, 102, 72, 0.38);
+      --line: rgba(246, 170, 5, 0.22);
+      --line-strong: rgba(246, 170, 5, 0.44);
+      --glow: none;
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--base0);
+      background:
+        radial-gradient(circle at 78% 16%, rgba(246, 170, 5, 0.13), transparent 26rem),
+        radial-gradient(circle at 14% 85%, rgba(146, 182, 105, 0.09), transparent 28rem),
+        linear-gradient(145deg, #171107 0%, var(--base03) 52%, #1b1609 100%);
+      font-family: var(--sans);
+      letter-spacing: 0.01em;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.09;
+      background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.16) 0, rgba(255,255,255,0.16) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: overlay;
+    }
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.48) 100%);
+    }
+    .page {
+      width: min(1480px, calc(100vw - 40px));
+      margin: 0 auto;
+      padding: 34px 0 40px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: 0.9fr 1.45fr;
+      gap: 28px;
+      align-items: start;
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+      font-size: clamp(2.3rem, 4.5vw, 4.65rem);
+      font-weight: 700;
+      letter-spacing: -0.065em;
+      line-height: 0.9;
+      color: var(--yellow);
+    }
+    .subtitle {
+      max-width: 640px;
+      margin: 0 0 30px;
+      color: var(--base0);
+      font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 400;
+      letter-spacing: -0.018em;
+      line-height: 1.5;
+    }
+    .section-title {
+      margin: 0 0 14px;
+      color: var(--yellow);
+      font-family: var(--mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+    .palette-grid, .accent-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(95px, 1fr));
+      gap: 16px;
+    }
+    .palette-grid { margin-bottom: 26px; }
+    .swatch {
+      min-width: 0;
+      font-family: var(--mono);
+    }
+    .chip {
+      height: 30px;
+      border-radius: 5px;
+      border: 1px solid var(--line);
+margin-bottom: 8px;
+    }
+    .swatch strong {
+      display: block;
+      color: var(--base0);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+    .swatch span {
+      color: var(--base0);
+      font-size: 0.78rem;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+overflow: hidden;
+      backdrop-filter: blur(14px);
+    }
+    .window-bar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(44, 37, 25, 0.62);
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--base00);
+    }
+    .dot:nth-child(1) { background: var(--yellow); }
+    .dot:nth-child(2) { background: var(--base1); }
+    .dot:nth-child(3) { background: var(--base01); }
+    .window-title {
+      margin-left: auto;
+      margin-right: auto;
+      color: var(--yellow);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+    }
+    .editor {
+      display: grid;
+      grid-template-columns: 56px 230px 1fr;
+      min-height: 445px;
+    }
+    .activity {
+      border-right: 1px solid var(--line);
+      background: rgba(44, 37, 25, 0.36);
+      padding: 16px 0;
+      display: grid;
+      justify-items: center;
+      align-content: start;
+      gap: 22px;
+      color: var(--yellow);
+      font-family: var(--mono);
+      font-size: 1.25rem;
+    }
+    .side {
+      border-right: 1px solid var(--line);
+      padding: 16px 0 12px;
+      background: rgba(59, 46, 28, 0.46);
+      font-family: var(--mono);
+      color: var(--base1);
+    }
+    .side h2 {
+      margin: 0 18px 16px;
+      color: var(--base1);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .tree {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+    .tree li {
+      padding: 0 18px;
+      white-space: nowrap;
+    }
+    .tree li.active {
+      background: rgba(246, 170, 5, 0.10);
+      color: var(--yellow);
+      border-left: 2px solid var(--yellow);
+      padding-left: 16px;
+    }
+    .code {
+      padding: 18px 24px;
+      font-family: var(--mono);
+      font-size: clamp(0.9rem, 1.25vw, 1.05rem);
+      line-height: 1.65;
+      color: var(--base1);
+      overflow: auto;
+    }
+    .code table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .code td:first-child {
+      width: 42px;
+      color: var(--base0);
+      text-align: right;
+      padding-right: 18px;
+      user-select: none;
+    }
+    .kw { color: var(--orange); }
+    .fn { color: var(--yellow); }
+    .str { color: var(--green); }
+    .ty { color: var(--blue); }
+    .cm { color: var(--base0); }
+    .op { color: var(--base1); }
+    .status {
+      border-top: 1px solid var(--line);
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      color: var(--base0);
+      background: rgba(44, 37, 25, 0.44);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+    }
+    .mock-section {
+      display: grid;
+      grid-template-columns: 0.95fr 1.45fr;
+      gap: 28px;
+      margin-top: 28px;
+    }
+    .ui-card { padding: 18px; }
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 22px;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+    }
+    button, .badge, .input {
+      border: 1px solid var(--line-strong);
+      background: rgba(59, 46, 28, 0.6);
+      color: var(--base1);
+      border-radius: 9px;
+      min-height: 34px;
+      padding: 0 13px;
+      font-family: var(--mono);
+}
+    button.primary, .badge {
+      background: rgba(246, 170, 5, 0.18);
+      color: var(--yellow);
+      border-color: rgba(246, 170, 5, 0.52);
+    }
+    a {
+      color: var(--yellow);
+      text-decoration-color: rgba(246, 170, 5, 0.55);
+      text-underline-offset: 3px;
+    }
+    .checkbox, .radio {
+      display: inline-grid;
+      place-items: center;
+      width: 17px;
+      height: 17px;
+      border: 1px solid var(--yellow);
+      color: var(--yellow);
+      margin-right: 6px;
+      vertical-align: -3px;
+    }
+    .radio { border-radius: 50%; }
+    .radio::after {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--yellow);
+      border-radius: 50%;
+    }
+    .terminal {
+      min-height: 330px;
+      font-family: var(--mono);
+      font-size: 0.98rem;
+      line-height: 1.62;
+      padding: 18px;
+      color: var(--base1);
+    }
+    .prompt { color: var(--green); }
+    .cmd { color: var(--yellow); }
+    .dim { color: var(--base0); }
+    .file { color: var(--blue); }
+    .ok { color: var(--green); }
+    .warn { color: var(--orange); }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 14px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: rgba(44, 37, 25, 0.48);
+      padding: 16px;
+      min-height: 162px;
+      font-family: var(--mono);
+    }
+    .metric h3 {
+      margin: 0 0 14px;
+      color: var(--yellow);
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .rows {
+      display: grid;
+      gap: 9px;
+      color: var(--base1);
+      font-size: 0.9rem;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 80px 1fr 52px;
+      gap: 10px;
+      align-items: center;
+    }
+    .bar {
+      height: 8px;
+      border: 1px solid rgba(246, 170, 5, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(129, 102, 72, 0.28);
+    }
+    .fill {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: linear-gradient(90deg, rgba(246, 170, 5, 0.32), var(--yellow));
+    }
+    .chart {
+      height: 105px;
+      width: 100%;
+      display: block;
+      margin-top: 6px;
+      border-left: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background-image: linear-gradient(to top, rgba(246, 170, 5, 0.16) 1px, transparent 1px), linear-gradient(to right, rgba(246, 170, 5, 0.08) 1px, transparent 1px);
+      background-size: 100% 33%, 14% 100%;
+    }
+    .chart polyline {
+      fill: none;
+      stroke: var(--yellow);
+      stroke-width: 3;
+}
+    .chart .secondary {
+      stroke: var(--green);
+      opacity: 0.85;
+    }
+    .process-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--base1);
+      font-size: 0.86rem;
+    }
+    .process-table th {
+      color: var(--base1);
+      font-weight: 500;
+      text-align: left;
+      padding-bottom: 9px;
+    }
+    .process-table td { padding: 5px 0; }
+    .token-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .token {
+      border: 1px solid var(--line);
+      color: var(--base1);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      background: rgba(59, 46, 28, 0.54);
+    }
+    .right-column {
+      display: grid;
+      gap: 20px;
+    }
+
+    .right-column .card[style] {
+      margin-top: 0 !important;
+    }
+
+    .css-ref {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+    pre {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(17, 12, 5, 0.55);
+      color: var(--base1);
+      overflow: auto;
+      padding: 18px;
+font-family: var(--mono);
+      font-size: 0.86rem;
+      line-height: 1.55;
+    }
+
+    .real-form {
+      display: grid;
+      gap: 16px;
+      font-family: var(--mono);
+    }
+
+    fieldset {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      margin: 0;
+      background: rgba(44, 37, 25, 0.28);
+    }
+
+    legend {
+      color: var(--yellow);
+      padding: 0 8px;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    label {
+      display: grid;
+      gap: 6px;
+      color: var(--base1);
+      font-size: 0.84rem;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      border: 1px solid var(--line-strong);
+      background: rgba(59, 46, 28, 0.62);
+      color: var(--base1);
+      border-radius: 8px;
+      min-height: 36px;
+      padding: 7px 10px;
+      font: inherit;
+      accent-color: var(--yellow);
+    }
+
+    textarea {
+      min-height: 74px;
+      resize: vertical;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--base0);
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus-visible {
+      outline: 2px solid var(--yellow);
+      outline-offset: 2px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      background: rgba(246, 170, 5, 0.16);
+      color: var(--yellow);
+      border-color: rgba(246, 170, 5, 0.58);
+      font-weight: 700;
+    }
+
+    button[type="reset"] {
+      color: var(--base1);
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+      width: auto;
+      min-height: auto;
+      padding: 0;
+    }
+
+    .choice-row,
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .choice-row label {
+      display: inline-flex;
+      grid-template-columns: none;
+      align-items: center;
+      gap: 7px;
+      line-height: 1.2;
+    }
+
+    .choice-row input[type="checkbox"],
+    .choice-row input[type="radio"] {
+      width: 1rem;
+      height: 1rem;
+      min-height: auto;
+      margin: 0;
+      flex: 0 0 auto;
+    }
+
+    .choice-row input[type="radio"] {
+      transform: translateY(1px);
+    }
+
+    input[type="range"] {
+      padding: 0;
+      border: 0;
+      background: transparent;
+    }
+
+    progress,
+    meter {
+      width: 100%;
+      height: 13px;
+      accent-color: var(--yellow);
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: var(--base1);
+      background: rgba(59, 46, 28, 0.36);
+    }
+
+    summary {
+      color: var(--yellow);
+      cursor: pointer;
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 620px) {
+      .form-grid,
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+
+    .real-form,
+    .real-form *,
+    .real-form input,
+    .real-form select,
+    .real-form textarea,
+    .real-form button {
+      font-family: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .mock-section, .css-ref { grid-template-columns: 1fr; }
+      .editor { grid-template-columns: 44px 1fr; }
+      .side { display: none; }
+      .palette-grid, .accent-grid { grid-template-columns: repeat(2, minmax(120px, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      .page { width: min(100vw - 24px, 1480px); padding-top: 20px; }
+      .dashboard { grid-template-columns: 1fr; }
+      .palette-grid, .accent-grid { grid-template-columns: 1fr; }
+      .code { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div>
+        <h1>Solarized<br>Dark Amber</h1>
+        <p class="subtitle">
+          An amber-monitor dark theme with a Solarized-inspired 8+8 palette,
+          soft luminance steps, readable syntax accents, and warm low-glare UI surfaces.
+        </p>
+        <p class="section-title">Base palette</p>
+        <div class="palette-grid">
+          <div class="swatch"><div class="chip" style="background:var(--base03)"></div><strong>base03</strong><span data-color="base03"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base02)"></div><strong>base02</strong><span data-color="base02"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base01)"></div><strong>base01</strong><span data-color="base01"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base00)"></div><strong>base00</strong><span data-color="base00"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base0)"></div><strong>base0</strong><span data-color="base0"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base1)"></div><strong>base1</strong><span data-color="base1"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base2)"></div><strong>base2</strong><span data-color="base2"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--base3)"></div><strong>base3</strong><span data-color="base3"></span></div>
+        </div>
+        <p class="section-title">Accent palette</p>
+        <div class="accent-grid">
+          <div class="swatch"><div class="chip" style="background:var(--yellow)"></div><strong>yellow</strong><span data-color="yellow"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--orange)"></div><strong>orange</strong><span data-color="orange"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--red)"></div><strong>red</strong><span data-color="red"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--magenta)"></div><strong>magenta</strong><span data-color="magenta"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--violet)"></div><strong>violet</strong><span data-color="violet"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--blue)"></div><strong>blue</strong><span data-color="blue"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--cyan)"></div><strong>cyan</strong><span data-color="cyan"></span></div>
+          <div class="swatch"><div class="chip" style="background:var(--green)"></div><strong>green</strong><span data-color="green"></span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="window-title">main.rs</span></div>
+        <div class="editor">
+          <aside class="activity"><span>▧</span><span>⌕</span><span>⑂</span><span>⚙</span></aside>
+          <aside class="side">
+            <h2>Explorer</h2>
+            <ul class="tree">
+              <li>▾ amber-project</li>
+              <li>&nbsp;&nbsp;▾ src</li>
+              <li class="active">&nbsp;&nbsp;&nbsp;&nbsp;◎ main.rs</li>
+              <li>&nbsp;&nbsp;&nbsp;&nbsp;◎ lib.rs</li>
+              <li>&nbsp;&nbsp;▸ tests</li>
+              <li>&nbsp;&nbsp;◌ Cargo.toml</li>
+              <li>&nbsp;&nbsp;◌ README.md</li>
+            </ul>
+          </aside>
+          <section class="code" aria-label="Code editor mockup">
+            <table>
+              <tr><td>1</td><td><span class="kw">use</span> std::fs::<span class="ty">File</span>;</td></tr>
+              <tr><td>2</td><td><span class="kw">use</span> std::io::{self, <span class="ty">BufRead</span>};</td></tr>
+              <tr><td>3</td><td></td></tr>
+              <tr><td>4</td><td><span class="kw">fn</span> <span class="fn">main</span>() <span class="op">-&gt;</span> io::<span class="ty">Result</span>&lt;()&gt; {</td></tr>
+              <tr><td>5</td><td>&nbsp;&nbsp;<span class="kw">let</span> file = <span class="ty">File</span>::open(<span class="str">"data.txt"</span>)?;</td></tr>
+              <tr><td>6</td><td>&nbsp;&nbsp;<span class="kw">let</span> reader = io::<span class="ty">BufReader</span>::new(file);</td></tr>
+              <tr><td>7</td><td></td></tr>
+              <tr><td>8</td><td>&nbsp;&nbsp;<span class="kw">for</span> line <span class="kw">in</span> reader.lines() {</td></tr>
+              <tr><td>9</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">let</span> line = line?;</td></tr>
+              <tr><td>10</td><td>&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">println!</span>(<span class="str">"{}"</span>, line);</td></tr>
+              <tr><td>11</td><td>&nbsp;&nbsp;}</td></tr>
+              <tr><td>12</td><td></td></tr>
+              <tr><td>13</td><td>&nbsp;&nbsp;<span class="ty">Ok</span>(())</td></tr>
+              <tr><td>14</td><td>}</td></tr>
+              <tr><td>15</td><td><span class="cm">// warm contrast, calm saturation, readable focus</span></td></tr>
+            </table>
+          </section>
+        </div>
+        <div class="status"><span>⑂ main</span><span>Ln 10, Col 29&nbsp;&nbsp; Spaces: 4&nbsp;&nbsp; UTF-8&nbsp;&nbsp; Rust</span></div>
+      </div>
+    </section>
+
+    <section class="mock-section">
+      <div>
+        <div class="card ui-card">
+          <p class="section-title">Real HTML elements</p>
+
+          <form class="real-form">
+            <fieldset>
+              <legend>Inputs</legend>
+              <div class="form-grid">
+                <label>
+                  Search
+                  <input type="search" placeholder="Search commands..." value="theme palette">
+                </label>
+
+                <label>
+                  Role
+                  <select>
+                    <option>Terminal</option>
+                    <option>Editor</option>
+                    <option>Dashboard</option>
+                  </select>
+                </label>
+
+                <label>
+                  Token
+                  <input type="text" value="--base1: #C2964F">
+                </label>
+
+                <label>
+                  Date
+                  <input type="date" value="2026-05-22">
+                </label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Choices</legend>
+              <div class="choice-row">
+                <label><input type="checkbox" checked> Low glare</label>
+                <label><input type="checkbox" checked> Amber ramp</label>
+                <label><input type="radio" name="contrast" checked> Normal</label>
+                <label><input type="radio" name="contrast"> High contrast</label>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend>Controls</legend>
+              <label>
+                Warmth
+                <input type="range" min="0" max="100" value="72">
+              </label>
+
+              <div class="status-grid">
+                <label>
+                  Build progress
+                  <progress value="68" max="100">68%</progress>
+                </label>
+
+                <label>
+                  Contrast meter
+                  <meter min="0" max="100" low="30" high="70" optimum="82" value="82">82%</meter>
+                </label>
+              </div>
+            </fieldset>
+
+            <label>
+              Notes
+              <textarea>Keep base colors warm, not olive. Use yellow only for active or selected states.</textarea>
+            </label>
+
+            <details>
+              <summary>Palette guidance</summary>
+              <p>Use base colors for structure and text. Reserve yellow for focus, active states, prompts, and selections.</p>
+            </details>
+
+            <div class="button-row">
+              <button type="submit">Apply theme</button>
+              <button type="button">Preview</button>
+              <button type="reset">Reset</button>
+              <a href="palette-rebuild.html">Palette design record</a>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="right-column">
+        <div class="card" style="margin-top: 20px">
+          <div class="window-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="window-title">user@amberbox: ~</span></div>
+          <div class="terminal">
+            <div><span class="prompt">user@amberbox</span>:<span class="file">~</span>$ <span class="cmd">ls -la</span></div>
+            <div><span class="dim">total 48</span></div>
+            <div>drwxr-xr-x&nbsp;&nbsp;6 user user&nbsp;&nbsp;192 May 22 10:15 <span class="file">.</span></div>
+            <div>drwxr-xr-x&nbsp;&nbsp;3 root root&nbsp;&nbsp; 96 Apr 12 09:01 <span class="file">..</span></div>
+            <div>-rw-r--r--&nbsp;&nbsp;1 user user&nbsp;&nbsp;220 May 22 09:58 .bash_logout</div>
+            <div>-rw-r--r--&nbsp;&nbsp;1 user user 3526 May 22 09:58 .bashrc</div>
+            <div>drwxr-xr-x&nbsp;&nbsp;4 user user&nbsp;&nbsp;128 May 22 10:12 <span class="file">.config</span></div>
+            <div>drwxr-xr-x&nbsp;&nbsp;3 user user&nbsp;&nbsp; 96 May 21 18:43 <span class="file">projects</span></div>
+            <div>-rw-r--r--&nbsp;&nbsp;1 user user&nbsp;&nbsp;807 May 20 14:33 notes.txt</div>
+            <div><span class="prompt">user@amberbox</span>:<span class="file">~</span>$ <span class="ok">theme apply solarized-dark-amber</span></div>
+            <div><span class="warn">warning:</span> high nostalgia detected</div>
+          </div>
+        </div>
+
+      <div class="card dashboard-card">
+        <div class="dashboard">
+          <div class="metric">
+            <h3>System</h3>
+            <div class="rows">
+              <div class="row"><span>Uptime</span><span>2d 4h 12m</span><span></span></div>
+              <div class="row"><span>CPU</span><div class="bar"><span class="fill" style="--w:18%"></span></div><span>18%</span></div>
+              <div class="row"><span>Memory</span><div class="bar"><span class="fill" style="--w:31%"></span></div><span>31%</span></div>
+              <div class="row"><span>Disk</span><div class="bar"><span class="fill" style="--w:42%"></span></div><span>42%</span></div>
+            </div>
+          </div>
+          <div class="metric">
+            <h3>CPU history</h3>
+            <svg class="chart" viewBox="0 0 500 120" preserveAspectRatio="none" aria-label="CPU history chart">
+              <polyline points="0,84 20,58 40,86 60,76 80,42 100,66 120,91 140,70 160,96 180,82 200,102 220,78 240,90 260,64 280,52 300,72 320,34 340,92 360,78 380,86 400,48 420,74 440,99 460,68 480,76 500,56"></polyline>
+            </svg>
+          </div>
+          <div class="metric">
+            <h3>Processes</h3>
+            <table class="process-table">
+              <thead><tr><th>Name</th><th>CPU%</th><th>MEM%</th></tr></thead>
+              <tbody>
+                <tr><td>code</td><td>5.4</td><td>3.1</td></tr>
+                <tr><td>ptyxis</td><td>1.2</td><td>0.6</td></tr>
+                <tr><td>git</td><td>0.7</td><td>0.3</td></tr>
+                <tr><td>slack</td><td>0.6</td><td>2.1</td></tr>
+                <tr><td>firefox</td><td>0.5</td><td>4.8</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="metric">
+            <h3>Network</h3>
+            <svg class="chart" viewBox="0 0 500 120" preserveAspectRatio="none" aria-label="Network chart">
+              <polyline class="secondary" points="0,70 25,66 50,73 75,62 100,69 125,71 150,64 175,60 200,67 225,65 250,58 275,64 300,61 325,67 350,54 375,60 400,65 425,58 450,63 475,56 500,61"></polyline>
+              <polyline points="0,92 25,88 50,96 75,86 100,82 125,78 150,91 175,85 200,88 225,84 250,86 275,82 300,89 325,84 350,90 375,86 400,88 425,98 450,93 475,91 500,86"></polyline>
+            </svg>
+            <div class="token-row"><span class="token">↑ 2.7KB/s</span><span class="token">↓ 1.4KB/s</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="css-ref">
+      <div>
+        <p class="section-title">CSS variables</p>
+        <pre id="css-variables"></pre>
+      </div>
+      <div>
+        <p class="section-title">Terminal palette order</p>
+        <pre>black:          #2C2519
+red:            #FF716A
+green:          #92B669
+yellow:         #F6AA05
+blue:           #7DB0A4
+magenta:        #B68BE7
+cyan:           #8BB684
+white:          #F9E6BE
+
+bright black:   #957047
+bright red:     #FF8C83
+bright green:   #A8C382
+bright yellow:  #F8B932
+bright blue:    #97BEB1
+bright magenta: #C4A0E6
+bright cyan:    #A2C397
+bright white:   #FEF6E5</pre>
+      </div>
+    </section>
+  </main>
+  <script>
+    const colors = [...document.querySelectorAll("[data-color]")];
+    const styles = getComputedStyle(document.documentElement);
+    for (const color of colors) color.textContent = styles.getPropertyValue(`--${color.dataset.color}`).trim();
+    document.querySelector("#css-variables").textContent = `:root {\n${colors.map(color => `  --${color.dataset.color}: ${color.textContent};`).join("\n")}\n}`;
+  </script>
+</body>
+</html>

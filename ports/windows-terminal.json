@@ -1,0 +1,23 @@
+{
+  "name": "Solarized Dark Amber",
+  "background": "#2C2519",
+  "foreground": "#B18A53",
+  "selectionBackground": "#3B2E1C",
+  "cursorColor": "#F6AA05",
+  "black": "#2C2519",
+  "red": "#FF716A",
+  "green": "#92B669",
+  "yellow": "#F6AA05",
+  "blue": "#7DB0A4",
+  "purple": "#B68BE7",
+  "cyan": "#8BB684",
+  "white": "#F9E6BE",
+  "brightBlack": "#957047",
+  "brightRed": "#FF8C83",
+  "brightGreen": "#A8C382",
+  "brightYellow": "#F8B932",
+  "brightBlue": "#97BEB1",
+  "brightPurple": "#C4A0E6",
+  "brightCyan": "#A2C397",
+  "brightWhite": "#FEF6E5"
+}
