@@ -1,0 +1,95 @@
+/* Solarized Dark Amber preset for Rewaita. */
+@define-color accent_color #F6AA05;
+@define-color accent_bg_color @accent_color;
+@define-color accent_fg_color #312400;
+
+@define-color window_bg_color #312400;
+@define-color window_fg_color #B18B34;
+@define-color view_bg_color #312400;
+@define-color view_fg_color #B18B34;
+
+@define-color headerbar_bg_color #3D2E0F;
+@define-color headerbar_backdrop_color #3D2E0F;
+@define-color headerbar_fg_color #BF9841;
+@define-color popover_bg_color #3D2E0F;
+@define-color popover_fg_color #BF9841;
+@define-color dialog_bg_color @popover_bg_color;
+@define-color dialog_fg_color @popover_fg_color;
+@define-color card_bg_color #3D2E0F;
+@define-color card_fg_color #BF9841;
+
+@define-color sidebar_bg_color #312400;
+@define-color sidebar_fg_color #B18B34;
+@define-color sidebar_backdrop_color @sidebar_bg_color;
+@define-color sidebar_border_color #82672D;
+@define-color secondary_sidebar_bg_color @sidebar_bg_color;
+@define-color secondary_sidebar_fg_color @sidebar_fg_color;
+@define-color secondary_sidebar_backdrop_color @sidebar_backdrop_color;
+@define-color secondary_sidebar_border_color @sidebar_border_color;
+
+@define-color success_color #92B669;
+@define-color success_bg_color #92B669;
+@define-color success_fg_color #312400;
+@define-color warning_color #F6AA05;
+@define-color warning_bg_color #F6AA05;
+@define-color warning_fg_color #312400;
+@define-color destructive_color #FF716A;
+@define-color destructive_bg_color #FF716A;
+@define-color destructive_fg_color #312400;
+@define-color error_color @destructive_color;
+@define-color error_bg_color @destructive_bg_color;
+@define-color error_fg_color @destructive_fg_color;
+
+@define-color blue_1 #7DB0A4;
+@define-color blue_2 #8BB684;
+@define-color blue_3 #92B669;
+@define-color blue_4 #B68BE7;
+@define-color blue_5 #D4889D;
+
+@define-color green_1 #92B669;
+@define-color green_2 #8BB684;
+@define-color green_3 #F6AA05;
+@define-color green_4 #F07F3E;
+@define-color green_5 #7DB0A4;
+
+@define-color yellow_1 #F6AA05;
+@define-color yellow_2 #F07F3E;
+@define-color yellow_3 #FF716A;
+@define-color yellow_4 #D4889D;
+@define-color yellow_5 #B68BE7;
+
+@define-color orange_1 #F07F3E;
+@define-color orange_2 #FF716A;
+@define-color orange_3 #D4889D;
+@define-color orange_4 #B68BE7;
+@define-color orange_5 #7DB0A4;
+
+@define-color red_1 #FF716A;
+@define-color red_2 #D4889D;
+@define-color red_3 #B68BE7;
+@define-color red_4 #7DB0A4;
+@define-color red_5 #8BB684;
+
+@define-color purple_1 #B68BE7;
+@define-color purple_2 #D4889D;
+@define-color purple_3 #FF716A;
+@define-color purple_4 #F07F3E;
+@define-color purple_5 #F6AA05;
+
+@define-color brown_1 #82672D;
+@define-color brown_2 #8F7339;
+@define-color brown_3 #3D2E0F;
+@define-color brown_4 #312400;
+@define-color brown_5 #B18B34;
+
+@define-color light_1 #BF9841;
+@define-color light_2 #F1E8C9;
+@define-color light_3 #FFF6D7;
+@define-color light_4 #7DB0A4;
+@define-color light_5 #82672D;
+
+@define-color dark_1 #3D2E0F;
+@define-color dark_2 #312400;
+@define-color dark_3 #312400;
+@define-color dark_4 #312400;
+@define-color dark_5 #312400;

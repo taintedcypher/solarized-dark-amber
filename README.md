@@ -44,6 +44,7 @@ node scripts/palette.mjs --check
 Application ports:
 
 - [Ptyxis palette](ports/ptyxis.palette): import with `ptyxis --import-palette ports/ptyxis.palette`, then select **Solarized Dark Amber** in your Ptyxis profile preferences.
+- [Rewaita preset](ports/rewaita.css): copy it to `~/.var/app/io.github.swordpuffin.rewaita/data/dark/Solarized Dark Amber.css`, restart Rewaita, then select **Solarized Dark Amber**.
 - [Windows Terminal color scheme](ports/windows-terminal.json): add its object to the `schemes` array in your Windows Terminal settings.
 
 Open [`index.html`](index.html) to view the full theme specimen. It is also ready to publish from the repository root with GitHub Pages.
