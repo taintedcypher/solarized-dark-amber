@@ -8,16 +8,16 @@ A warm, low-glare 16-color theme built on a Solarized-inspired CIELAB ramp with 
 
 | Base | Hex | Accent | Hex |
 | --- | --- | --- | --- |
-| `base03` | `#2C2519` | `yellow` | `#F6AA05` |
-| `base02` | `#3B2E1C` | `orange` | `#F07F3E` |
-| `base01` | `#816648` | `red` | `#FF716A` |
-| `base00` | `#957047` | `magenta` | `#D4889D` |
-| `base0` | `#B18A53` | `violet` | `#B68BE7` |
-| `base1` | `#C2964F` | `blue` | `#7DB0A4` |
-| `base2` | `#F9E6BE` | `cyan` | `#8BB684` |
-| `base3` | `#FEF6E5` | `green` | `#92B669` |
+| `base03` | `#312400` | `yellow` | `#F6AA05` |
+| `base02` | `#3D2E0F` | `orange` | `#F07F3E` |
+| `base01` | `#82672D` | `red` | `#FF716A` |
+| `base00` | `#8F7339` | `magenta` | `#D4889D` |
+| `base0` | `#B18B34` | `violet` | `#B68BE7` |
+| `base1` | `#BF9841` | `blue` | `#7DB0A4` |
+| `base2` | `#F1E8C9` | `cyan` | `#8BB684` |
+| `base3` | `#FFF6D7` | `green` | `#92B669` |
 
-Use `base03` for the background with `base0` text, and `base02` for raised or selected surfaces with `base1` text. Those pairs measure 4.78:1 and 4.88:1. Reserve `base2` and `base3` for inverse surfaces, `base00` for nonessential muted text, and `yellow` for focus or active states.
+Use `base03` for the background with `base0` text, and `base02` for raised or selected surfaces with `base1` text. Those pairs measure 4.78:1 and 4.90:1. Reserve `base2` and `base3` for inverse surfaces, `base00` for nonessential muted text, and `yellow` for focus or active states.
 
 ## Use
 
@@ -41,7 +41,10 @@ node scripts/palette.mjs
 node scripts/palette.mjs --check
 ```
 
-The first application port is a [Windows Terminal color scheme](ports/windows-terminal.json). Add its object to the `schemes` array in your Windows Terminal settings.
+Application ports:
+
+- [Ptyxis palette](ports/solarized-dark-amber.palette): import with `ptyxis --import-palette ports/solarized-dark-amber.palette`, then select **Solarized Dark Amber** in your Ptyxis profile preferences.
+- [Windows Terminal color scheme](ports/windows-terminal.json): add its object to the `schemes` array in your Windows Terminal settings.
 
 Open [`index.html`](index.html) to view the full theme specimen. It is also ready to publish from the repository root with GitHub Pages.
 
